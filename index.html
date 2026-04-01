@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oivee</title>
+
+<style>
+body {
+  margin: 0;
+  background: radial-gradient(circle at top, #111, #050505);
+  color: #eaeaea;
+  font-family: 'Courier New', monospace;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* subtle noise overlay */
+body::after {
+  content: "";
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: url('https://grainy-gradients.vercel.app/noise.svg');
+  opacity: 0.05;
+  pointer-events: none;
+}
+
+.container {
+  text-align: left;
+  max-width: 800px;
+  padding: 20px;
+}
+
+.line {
+  font-size: 1.6rem;
+  margin: 8px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 2px solid #fff;
+  display: inline-block;
+}
+
+.glow {
+  color: #fff;
+  text-shadow: 0 0 8px rgba(255,255,255,0.4);
+}
+
+.subtext {
+  margin-top: 30px;
+  color: #888;
+  opacity: 0;
+  transition: opacity 1.5s ease;
+}
+
+.btn {
+  margin-top: 30px;
+  display: inline-block;
+  padding: 14px 28px;
+  background: transparent;
+  color: white;
+  text-decoration: none;
+  border: 1px solid #444;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  opacity: 0;
+}
+
+.btn:hover {
+  background: white;
+  color: black;
+  transform: translateY(-2px);
+}
+
+.footer {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  color: #555;
+  font-size: 13px;
+  letter-spacing: 1px;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+  <div id="line1" class="line glow"></div><br>
+  <div id="line2" class="line"></div><br>
+  <div id="line3" class="line"></div>
+
+  <div id="subtext" class="subtext">
+    Oivee builds websites designed to increase customer flow — not just look good.
+  </div>
+
+  <a id="cta" class="btn" href="https://wa.me/919064982248" target="_blank">
+    → Get Free Audit
+  </a>
+</div>
+
+<div class="footer">
+  oivee.com / @oiveebyshik
+</div>
+
+<script>
+const lines = [
+  "Initializing Oivee...",
+  "Analyzing your business...",
+  "Building systems that convert."
+];
+
+let lineIndex = 0;
+let charIndex = 0;
+
+function typeLine() {
+  if (lineIndex < lines.length) {
+    const currentLine = document.getElementById("line" + (lineIndex + 1));
+    
+    if (charIndex < lines[lineIndex].length) {
+      currentLine.innerHTML += lines[lineIndex].charAt(charIndex);
+      charIndex++;
+      setTimeout(typeLine, 40);
+    } else {
+      lineIndex++;
+      charIndex = 0;
+      setTimeout(typeLine, 400);
+    }
+  } else {
+    document.getElementById("subtext").style.opacity = 1;
+    document.getElementById("cta").style.opacity = 1;
+  }
+}
+
+typeLine();
+</script>
+
+</body>
+</html>
